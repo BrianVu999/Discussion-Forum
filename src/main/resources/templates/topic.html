@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/homeStyle.css}">
+</head>
+<body>
+	<div class="personalInform">
+		<div th:fragment="logout" class="logout"
+			sec:authorize="isAuthenticated()">
+			<span sec:authentication="name"></span> - <span
+				sec:authentication="principal.authorities"></span> &nbsp
+			<form class="inline" action="#" th:action="@{/logout}" method="post">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</div>
+	<div class="pageBody">
+		<h2>
+			Topic: <span th:text="${topic.topicName}"></span>
+		</h2>
+		<span th:text="${topic.topicTime}"></span> | <span
+			th:text="${topic.topicDate}"></span> | <span
+			th:text="${topic.topicCreatedPerson}"></span> __ <a
+			th:href="@{/home}">Back to Discussion</a>
+
+		<form th:action="@{/addPost/{topicNo}/(topicNo=${topic.topicNo})}"
+			th:object="${addedPost}" method="post">
+			<span sec:authentication="name"></span> <input type="submit"
+				value="Post"> <br>
+			<textarea th:field="*{postContent}" rows="2" cols="50" maxlength="199">
+			</textarea>
+		</form>
+
+		<div>
+			<table class="table">
+				<tr>
+					<th class="tableHead2">Post Information (lastest_order)</th>
+					<th>Post Content</th>
+				</tr>
+				<tr th:each="post : ${postList}" th:object="${post}">
+					<td><span th:text="*{postCreatedPerson}"></span> <br> <span
+						th:text="*{postTime}"></span> <br> <span
+						th:text="*{postDate}"></span></td>
+					<td class="tableHead3"><span th:text="*{postContent}"></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

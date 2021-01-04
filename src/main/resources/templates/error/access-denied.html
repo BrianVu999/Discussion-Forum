@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	
+<head>
+<title>Access Denied</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/homeStyle.css}">
+</head>
+<body class="textCenter">
+	<h1>Access denied</h1>
+	<div th:fragment="logout" class="logout"
+		sec:authorize="isAuthenticated()">
+		You logged in as: <span sec:authentication="name"></span> With roles:
+		<span sec:authentication="principal.authorities"></span><br>
+		<h2>This account is not authorized to access the requested page.</h2>
+		<h3 style="color: red;" th:text="${session.msg}"></h3>
+		<br>
+		<div>
+			<u><a th:href="@{/home}">Come Back To Home Page</a></u>
+			<br><br>
+			<form action="#" th:action="@{/logout}" method="post">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

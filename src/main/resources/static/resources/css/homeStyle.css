@@ -1,0 +1,125 @@
+@charset "ISO-8859-1";
+
+.inline {
+	display: inline;
+}
+
+body {
+	margin: 0;
+	font-family: ato, Lucida Sans Unicode, Lucida Grande, sans-serif;
+	letter-spacing: -1px;
+	color: #494c4e
+}
+
+.personalInform {
+	margin: 0;
+	background: linear-gradient(190deg, #1CB5E0 0%, #000851 100%);;
+	color: white;
+	font-family: Agency FB;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-align: right;
+	padding: 0.3em;
+	padding-right: 2em;
+}
+
+.alignCenter {
+	text-align: center;
+}
+
+input[type=submit] {
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=submit]:hover {
+	opacity: 0.7;
+	transition: 0.6s;
+}
+
+.pageBody {
+	margin: auto;
+	margin-top: 2em;
+	width: fit-content;
+}
+
+.table {
+	border-radius: 7px;
+	border: solid #d3d9e3 0.4px;
+	padding: 0;
+}
+
+th {
+	padding: 0;
+	margin: 0;
+	background-color: #f8fbff;
+	width: 7em;
+}
+
+td {
+	padding: 0;
+	margin: 0;
+	width: 7em;
+	word-wrap: break-word;
+}
+tr:first-child{
+	padding-left: 1em;	
+}
+
+tr:nth-child(2n+2) {
+	background-color: #f5f5f5;
+}
+
+.tableHead1 {
+	width: 16em;
+}
+
+.tableHead2 {
+	width: 8em;
+}
+
+.tableHead3 {
+	width: 34em;
+}
+
+a {
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 80%;
+	color: #093f7f;
+}
+
+.hidden {
+	display: none
+}
+
+.small {
+	font-size: 70%;
+}
+
+.noMarginLeft {
+	margin-left: 0;
+}
+
+hr {
+	width: 50%;
+	text-align: left;
+}
+
+h2 {
+	color: #0e5c96;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.whiteFont {
+	color: white;
+	font-family: Agency FB;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+.textCenter{
+	text-align: center;
+}

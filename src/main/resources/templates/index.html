@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Company Application</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/style.css}">
+</head>
+<body>
+	<div class="container">
+		<h1 class="title">Application</h1>
+		<br> <br> <br>
+		<h2>
+			<a th:href="@{/home}">Sign-In</a>
+		</h2>
+		<h2>
+			<a th:href="@{/register}">User Registration</a>
+		</h2>
+		<h2>
+			<br>
+		</h2>
+		<br>
+		<p class="alert">*** Only Use For Internal Employee ***</p>
+	</div>
+</body>
+</html>

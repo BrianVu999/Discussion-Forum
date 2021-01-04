@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/homeStyle.css}">
+</head>
+<body>
+	<div class="personalInform">
+		<div class="floatLeft">
+		<a class="whiteFont" th:href="@{/admin}">Admin Page</a>
+		</div>
+		<div th:fragment="logout" class="logout"
+			sec:authorize="isAuthenticated()">
+			<span sec:authentication="name"></span> - <span
+				sec:authentication="principal.authorities"></span> &nbsp
+			<form class="inline" action="#" th:action="@{/logout}" method="post">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</div>
+	<div class="pageBody">
+		<h2>Announcements</h2>
+		<h3 th:each="ann : ${annList}" th:object="${ann}">
+				<span th:text="*{annTitle}"></span>
+				<span class="small">
+					__ Posted by <span th:text="*{annCreatedPerson}"></span> _ <span
+						th:text="*{annDate}"></span> _ <span th:text="*{annTime}"></span>
+				</span>
+				<div th:text="*{annContent}"> </div>
+				<hr class="noMarginLeft">
+		</h3>
+
+		<h2>Discussions</h2>
+
+		<div>
+			<table class="table">
+				<tr>
+					<th class="tableHead1">Topic (lastest_order)</th>
+					<th>Posts Number</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Created By</th>
+				</tr>
+				<tr th:each="topic : ${topicList}" th:object="${topic}">
+					<td class="tableHead1"><a th:text="*{topicName}"
+						th:href="@{/topic/{topicNo}/(topicNo=*{topicNo})}"></a></td>
+					<td class="alignCenter" th:text="*{postNumber}"></td>
+					<td class="alignCenter" th:text="*{topicDate}"></td>
+					<td class="alignCenter" th:text="*{topicTime}"></td>
+					<td class="alignCenter" th:text="*{topicCreatedPerson}"></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</body>
+</html>

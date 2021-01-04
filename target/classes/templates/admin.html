@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/homeStyle.css}">
+<title>Admin Page</title>
+</head>
+<body>
+	<div class="personalInform">
+		<div class="floatLeft">
+			<a class="whiteFont" th:href="@{/admin}">Admin Page</a> - <a
+				class="whiteFont" th:href="@{/home}">Normal User Page</a>
+		</div>
+		<div th:fragment="logout" class="logout"
+			sec:authorize="isAuthenticated()">
+			<span sec:authentication="name"></span> - <span
+				sec:authentication="principal.authorities"></span> &nbsp
+			<form class="inline" action="#" th:action="@{/logout}" method="post">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+	</div>
+	<div class="pageBody">
+		<h3>User List
+			<button type="button" onclick="listUser()">List</button><br>
+			<p class="inline" id="userListContainer">...</p>
+		</h3>
+
+		<h2>
+			Announcements <a th:href="@{/admin}"> &#8635;refresh</a>
+		</h2>
+		<form th:action="@{/addAnnouncement}" th:object="${addedAnn}"
+			method="post">
+			<span sec:authentication="name"></span> <input type="submit"
+				value="Post New Announcement"> <br> <input type="text"
+				th:field="*{annTitle}" placeholder="Announcement Title"> <br>
+			<textarea th:field="*{annContent}" rows="2" cols="50" maxlength="200"
+				placeholder="Announcement Content">
+			</textarea>
+		</form>
+		<h3>
+			<dl th:each="ann : ${annList}" th:object="${ann}">
+				<div th:id="'ann'+${ann.annNo}">
+					<button type="button" th:onclick="'deleteAnn('+ ${ann.annNo} +')'">&#x274C;</button>
+					<dt class="inline" th:text="*{annTitle}"></dt>
+					<dd class="small inline noMarginLeft">
+						__ Posted by <span th:text="*{annCreatedPerson}"></span> _ <span
+							th:text="*{annDate}"> </span> _ <span th:text="*{annTime}"></span>
+					</dd>
+					<dd class="noMarginLeft" th:text="*{annContent}"></dd>
+					<hr class="noMarginLeft">
+				</div>
+			</dl>
+		</h3>
+
+		<h2>Discussions</h2>
+
+		<form th:action="@{/addTopic}" th:object="${addedTopic}" method="post">
+			<span sec:authentication="name"></span> <input type="submit"
+				value="Post New Topic"> <br> <input type="text"
+				th:field="*{topicName}" placeholder="Topic Name" maxlength="30">
+		</form>
+
+		<div>
+			<table class="table">
+				<tr>
+					<th class="tableHead1">Topic (lastest_order)</th>
+					<th>Posts Number</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Created By</th>
+				</tr>
+				<tr th:each="topic : ${topicList}" th:object="${topic}">
+					<td class="tableHead1"><a th:text="*{topicName}"
+						th:href="@{/topic/{topicNo}/(topicNo=*{topicNo})}"></a></td>
+					<td class="alignCenter" th:text="*{postNumber}"></td>
+					<td class="alignCenter" th:text="*{topicDate}"></td>
+					<td class="alignCenter" th:text="*{topicTime}"></td>
+					<td class="alignCenter" th:text="*{topicCreatedPerson}"></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/resources/js/script.js}"></script>
+</body>
+</html>
